@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google()
@@ -14,7 +16,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Cash Flow"
+rootProject.name = "CashFlow"
 
 include(":app")
 include(":resources")

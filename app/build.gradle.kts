@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.lrogozinski.cashflow"
+    namespace = BuildConstants.ApplicationId
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.lrogozinski.cashflow"
+        applicationId = BuildConstants.ApplicationId
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
@@ -50,7 +50,6 @@ android {
 }
 
 dependencies {
-    
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
