@@ -15,6 +15,7 @@ compileSdk = "34"
 targetSdk = "34"
 minSdk = "24"
 androidxComposeCompiler = "1.5.2"
+kotlinter = "4.0.0"
 
 [libraries]
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
@@ -37,3 +38,4 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-applicatiion = { id = "com.android.application", version.ref = "agp" }
+kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
