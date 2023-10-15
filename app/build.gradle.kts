@@ -34,6 +34,20 @@ android {
         }
     }
 
+    flavorDimensions += AppEnvironment.Dimension
+
+    productFlavors {
+        create(AppEnvironment.Dev()) {
+            dimension = AppEnvironment.Dimension
+            applicationIdSuffix = AppEnvironment.Dev.applicationIdSuffix
+        }
+
+        create(AppEnvironment.Prod()) {
+            dimension = AppEnvironment.Dimension
+            applicationIdSuffix = AppEnvironment.Prod.applicationIdSuffix
+        }
+    }
+
     buildFeatures {
         compose = true
     }
