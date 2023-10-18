@@ -1,6 +1,9 @@
+import BuildConstants.LauncherOverlay
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.easylauncher)
 }
 
 kotlin {
@@ -40,6 +43,8 @@ android {
         create(AppEnvironment.Dev()) {
             dimension = AppEnvironment.Dimension
             applicationIdSuffix = AppEnvironment.Dev.applicationIdSuffix
+            resValue("string", "app_name", "Cash Flow Dev")
+
         }
 
         create(AppEnvironment.Prod()) {
@@ -59,6 +64,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    configureEasyLauncher()
 }
 
 dependencies {
@@ -73,4 +79,28 @@ dependencies {
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
+}
+
+/**
+ * This plugin applies label overlay on top of launcher icon depending on flavor.
+ */
+fun configureEasyLauncher() {
+    easylauncher {
+        productFlavors {
+            AppEnvironment.values().forEach { environment ->
+                create(environment()) {
+                    if (environment.label != null) {
+                        filters(
+                            chromeLike(
+                                label = environment.label,
+                                labelPadding = LauncherOverlay.LabelPadding
+                            )
+                        )
+                    } else {
+                        enabled.set(false)
+                    }
+                }
+            }
+        }
+    }
 }
