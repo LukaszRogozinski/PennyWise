@@ -26,6 +26,15 @@ android {
             useSupportLibrary = true
         }
     }
+    
+    signingConfigs {
+        create("prod") {
+            keyAlias = findProperty("cashflow.keystore.alias").toString()
+            keyPassword = findProperty("cashflow.keystore.keyPassword").toString()
+            storeFile = file(findProperty("cashflow.keystore.path").toString())
+            storePassword = findProperty("cashflow.keystore.password").toString()
+        }
+    }
 
     buildTypes {
         release {
@@ -34,6 +43,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs["prod"]
         }
     }
 
