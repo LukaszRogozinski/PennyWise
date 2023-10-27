@@ -17,6 +17,7 @@ minSdk = "24"
 androidxComposeCompiler = "1.5.2"
 kotlinter = "4.0.0"
 easylauncher = "6.2.0"
+jdk = "17"
 
 [libraries]
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
