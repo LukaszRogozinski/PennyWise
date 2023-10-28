@@ -1,22 +1,38 @@
+import BuildConstants.LauncherOverlay
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.easylauncher)
+}
+
+kotlin {
+    jvmToolchain(libs.versions.jdk.get().toInt())
 }
 
 android {
-    namespace = "com.lrogozinski.cashflow"
-    compileSdk = 33
+    namespace = BuildConstants.ApplicationId
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.lrogozinski.cashflow"
-        minSdk = 24
-        targetSdk = 33
+        applicationId = BuildConstants.ApplicationId
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+    }
+    
+    signingConfigs {
+        create("prod") {
+            keyAlias = findProperty("cashflow.keystore.alias").toString()
+            keyPassword = findProperty("cashflow.keystore.keyPassword").toString()
+            storeFile = file(findProperty("cashflow.keystore.path").toString())
+            storePassword = findProperty("cashflow.keystore.password").toString()
         }
     }
 
@@ -27,33 +43,41 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs["prod"]
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+
+    flavorDimensions += AppEnvironment.Dimension
+
+    productFlavors {
+        create(AppEnvironment.Dev()) {
+            dimension = AppEnvironment.Dimension
+            applicationIdSuffix = AppEnvironment.Dev.applicationIdSuffix
+            resValue("string", "app_name", "Cash Flow Dev")
+
+        }
+
+        create(AppEnvironment.Prod()) {
+            dimension = AppEnvironment.Dimension
+            applicationIdSuffix = AppEnvironment.Prod.applicationIdSuffix
+        }
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.2"
+        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    configureEasyLauncher()
 }
 
 dependencies {
-
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
@@ -61,11 +85,32 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
+}
+
+/**
+ * This plugin applies label overlay on top of launcher icon depending on flavor.
+ */
+fun configureEasyLauncher() {
+    easylauncher {
+        productFlavors {
+            AppEnvironment.values().forEach { environment ->
+                create(environment()) {
+                    if (environment.label != null) {
+                        filters(
+                            chromeLike(
+                                label = environment.label,
+                                labelPadding = LauncherOverlay.LabelPadding
+                            )
+                        )
+                    } else {
+                        enabled.set(false)
+                    }
+                }
+            }
+        }
+    }
 }
