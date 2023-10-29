@@ -26,7 +26,7 @@ android {
             useSupportLibrary = true
         }
     }
-    
+
     signingConfigs {
         create("prod") {
             keyAlias = findProperty("cashflow.keystore.alias").toString()
@@ -54,7 +54,6 @@ android {
             dimension = AppEnvironment.Dimension
             applicationIdSuffix = AppEnvironment.Dev.applicationIdSuffix
             resValue("string", "app_name", "Cash Flow Dev")
-
         }
 
         create(AppEnvironment.Prod()) {
@@ -87,6 +86,7 @@ dependencies {
     implementation(libs.material3)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
+    testImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
 }
