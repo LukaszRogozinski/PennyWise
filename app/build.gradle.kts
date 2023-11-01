@@ -29,10 +29,10 @@ android {
 
     signingConfigs {
         create("prod") {
-            keyAlias = findProperty("cashflow.keystore.alias").toString()
-            keyPassword = findProperty("cashflow.keystore.keyPassword").toString()
-            storeFile = file(findProperty("cashflow.keystore.path").toString())
-            storePassword = findProperty("cashflow.keystore.password").toString()
+            keyAlias = findProperty("pennywise.keystore.alias").toString()
+            keyPassword = findProperty("pennywise.keystore.keyPassword").toString()
+            storeFile = file(findProperty("pennywise.keystore.path").toString())
+            storePassword = findProperty("pennywise.keystore.password").toString()
         }
     }
 

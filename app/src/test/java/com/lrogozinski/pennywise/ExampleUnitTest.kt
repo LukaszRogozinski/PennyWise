@@ -1,4 +1,4 @@
-package com.lrogozinski.cashflow
+package com.lrogozinski.pennywise
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

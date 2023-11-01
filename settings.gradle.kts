@@ -16,7 +16,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CashFlow"
+rootProject.name = "PennyWise"
 
 include(":app")
 include(":resources")
