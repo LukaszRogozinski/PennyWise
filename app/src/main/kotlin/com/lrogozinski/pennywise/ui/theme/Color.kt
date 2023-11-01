@@ -1,4 +1,4 @@
-package com.lrogozinski.cashflow.ui.theme
+package com.lrogozinski.pennywise.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
