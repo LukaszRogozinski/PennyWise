@@ -6,18 +6,11 @@ plugins {
     alias(libs.plugins.easylauncher)
 }
 
-kotlin {
-    jvmToolchain(libs.versions.jdk.get().toInt())
-}
-
 android {
     namespace = BuildConstants.ApplicationId
-    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = BuildConstants.ApplicationId
-        minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -53,7 +46,7 @@ android {
         create(AppEnvironment.Dev()) {
             dimension = AppEnvironment.Dimension
             applicationIdSuffix = AppEnvironment.Dev.applicationIdSuffix
-            resValue("string", "app_name", "Cash Flow Dev")
+            resValue("string", "app_name", "Penny Wise Dev")
         }
 
         create(AppEnvironment.Prod()) {

@@ -1,4 +1,3 @@
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
@@ -17,6 +16,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "PennyWise"
-
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
+include(":core")
 include(":resources")
