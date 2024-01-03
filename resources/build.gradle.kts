@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.lrogozinski.resources"
+    namespace = "com.lrogozinski.pennywise.resources"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
