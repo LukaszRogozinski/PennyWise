@@ -20,3 +20,4 @@ rootProject.name = "PennyWise"
 
 include(":app")
 include(":resources")
+include(":navigation")
