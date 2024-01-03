@@ -1,4 +1,3 @@
-
 pluginManagement {
     repositories {
         google()
@@ -19,5 +18,6 @@ rootProject.name = "PennyWise"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 include(":core")
-include(":resources")
+include(":features:onboarding")
 include(":navigation")
+include(":resources")
