@@ -6,13 +6,9 @@ plugins {
 
 android {
     namespace = "com.lrogozinski.pennywise.resources"
-    compileSdk = libs.versions.compileSdk.get().toInt()
-
-    defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
-    }
 }
 
 dependencies {
-    implementation(libs.material3)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.material3)
 }

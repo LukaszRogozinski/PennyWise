@@ -3,6 +3,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven("https://jitpack.io")
     }
 }
 
@@ -15,9 +16,13 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "PennyWise"
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 include(":core")
-include(":features:onboarding")
+include(":core-ui")
+include(":data")
+include(":domain")
+include(":features:dashboard")
 include(":navigation")
 include(":resources")
