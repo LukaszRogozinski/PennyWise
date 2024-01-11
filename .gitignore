@@ -57,6 +57,7 @@ obj/
 # OS-specific files
 .DS_Store
 .DS_Store?
+**/.DS_Store
 ._*
 .attach_pid*
 .Spotlight-V100

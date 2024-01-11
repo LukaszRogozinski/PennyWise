@@ -1,6 +1,8 @@
 import BuildConstants.LauncherOverlay
 
 plugins {
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     alias(libs.plugins.easylauncher)
@@ -14,9 +16,12 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+
+        buildFeatures {
+            buildConfig = true
         }
     }
 
@@ -70,18 +75,21 @@ android {
 }
 
 dependencies {
-    implementation(libs.lifecycle.runtime.ktx)
+    implementation(projects.coreUi)
+    implementation(projects.features.dashboard)
+    implementation(projects.navigation)
+    implementation(projects.resources)
+
     implementation(libs.activity.compose)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+
+    implementation(libs.timber)
+    implementation(libs.androidx.navigation.compose)
+
     implementation(platform(libs.compose.bom))
-    implementation(libs.ui)
-    implementation(libs.ui.graphics)
-    implementation(libs.ui.tooling.preview)
-    implementation(libs.material3)
-    androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.ui.test.junit4)
-    testImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
+    implementation(libs.compose.material3)
 }
 
 /**
